@@ -87,7 +87,7 @@ class PetDelegate(NSObject):
         self._show_frame()
         self.window.orderFrontRegardless()
         self.timer = NSTimer.scheduledTimerWithTimeInterval_target_selector_userInfo_repeats_(
-            1.0, self, "tick:", None, True
+            5.0, self, "tick:", None, True
         )
 
     def _load_frames(self) -> dict[str, list[NSImage]]:
@@ -109,7 +109,7 @@ class PetDelegate(NSObject):
         self._show_frame()
 
     def _show_frame(self) -> None:
-        state = "failed" if (time.monotonic() - self.started_at) % 25 >= 10 else "idle"
+        state = "failed" if (time.monotonic() - self.started_at) % 360 >= 60 else "idle"
         self.view.setImage_(self.frames[state][self.frame_index % len(self.frames[state])])
 
 
